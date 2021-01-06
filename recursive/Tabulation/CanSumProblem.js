@@ -31,7 +31,7 @@ const howCanSum = (target, arr) =>{
 const howSum = (target, arr) =>{
     const table = Array(target + 1).fill(null)
     table[0] = []
-    const howSum = []
+
     for(let i = 0; i <= target; i++){
         if(table[i] !== null){
             for(let j of arr){
@@ -42,6 +42,24 @@ const howSum = (target, arr) =>{
     return table
 }
 
+const bestSum = (target, arr) =>{
+    const table = Array(target + 1).fill(null)
+    table[0] = []
+
+    for(let i = 0; i <= target; i++){
+        if(table[i] !== null){
+            for(let j of arr){
+                const combination = [ ...table[i], j]
+                if (!table[i + j] || table[i + j].length > combination.length){
+                    table[i + j] = combination
+                }
+            }
+        }
+    }
+    return table[target]
+}
+
 console.log(howSum(7, [5,3,4,7]))
+console.log(bestSum(100, [1,2,5,25]))
 console.log(howCanSum(300, [7,14,5,8]))
 console.log(canSum(30701, [7,14,3,7]))
